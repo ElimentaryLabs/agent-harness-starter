@@ -1,0 +1,3 @@
+anthropic>=0.69
+pypdf>=4.0
+python-dotenv>=1.0
