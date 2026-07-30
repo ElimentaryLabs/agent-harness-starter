@@ -33,6 +33,9 @@ class ContextManager:
             total += len(c) if isinstance(c, str) else len(json.dumps(c, default=str))
         return total // _CHARS_PER_TOKEN
 
+    def over_budget(self, messages: List[Dict[str, Any]]) -> bool:
+        return self.estimate_tokens(messages) > self.token_budget
+
     def append_round(
         self,
         messages: List[Dict[str, Any]],

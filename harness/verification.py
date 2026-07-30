@@ -8,6 +8,12 @@ postcondition / quality gate.
 A rule returns None if the result is acceptable, or a string reason if it
 isn't; the loop marks the ToolResult verified/failed accordingly so the model
 sees the verdict next round.
+
+Note: this verdict is *advisory*, not a hard block. A failed postcondition is
+prefixed onto the model-visible content but the result still flows back as
+`is_error=False` — the model decides what to do with it. A stricter harness
+would fail the round outright; here the check is deterministic and the model
+stays in charge of the response.
 """
 from __future__ import annotations
 
