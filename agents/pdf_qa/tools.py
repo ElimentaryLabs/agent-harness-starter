@@ -24,12 +24,15 @@ class PdfDocument:
         self.reader = PdfReader(path)
         self.num_pages = len(self.reader.pages)
         self._markdown_cache: Dict[int, str] = {}
+        self._raw_text_cache: Dict[int, str] = {}
 
     def _raw_text(self, idx: int) -> str:
-        try:
-            return (self.reader.pages[idx].extract_text() or "").strip()
-        except Exception:
-            return ""
+        if idx not in self._raw_text_cache:
+            try:
+                self._raw_text_cache[idx] = (self.reader.pages[idx].extract_text() or "").strip()
+            except Exception:
+                self._raw_text_cache[idx] = ""
+        return self._raw_text_cache[idx]
 
     def page_pdf_bytes(self, idx: int) -> bytes:
         writer = PdfWriter()

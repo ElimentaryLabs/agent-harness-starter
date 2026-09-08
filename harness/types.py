@@ -67,7 +67,8 @@ class ToolResult:
 class StopReason(str, Enum):
     END_TURN = "end_turn"          # model answered with no tool call
     MAX_ROUNDS = "max_rounds"      # hit the turn budget
-    TOKEN_BUDGET = "token_budget"  # context exhausted
+    TOKEN_BUDGET = "token_budget"  # context exhausted (tail busts budget)
+    MAX_TOKENS = "max_tokens"      # model cut off mid-response
     TERMINATED = "terminated"      # a POST_ROUND hook set the terminate flag
     ERROR = "error"
 

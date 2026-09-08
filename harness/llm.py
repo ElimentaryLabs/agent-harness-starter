@@ -26,6 +26,8 @@ DEFAULT_PARSE_MODEL = os.getenv("HARNESS_PARSE_MODEL", "claude-haiku-4-5")
 
 
 def _supports_adaptive_thinking(model: str) -> bool:
+    # ponytail: hardcoded families — update when new model ids ship, or this
+    # silently disables thinking on a model that in fact supports it.
     return model.startswith("claude-opus-4-") or model == "claude-sonnet-4-6"
 
 
